@@ -311,18 +311,18 @@
   <div class="wrapper-container">
     <!-- Login Form -->
     <div id="login-section">
-      <h1 class="glitch" data-text="ACCESS TERMINAL">ACCESS TERMINAL</h1>
+      <h1 class="glitch" data-text="LOGIN">LOGIN</h1>
       <form onsubmit="login(event)" class="form-container">
         <div class="form-item">
-          <label for="username">USER ID:</label>
-          <input type="text" id="username" required placeholder="ENTER CREDENTIALS">
+          <label for="username">USERNAME:</label>
+          <input type="text" id="username" required placeholder="ENTER YOUR USERNAME">
         </div>
         <div class="form-item">
-          <label for="password">AUTH CODE:</label>
+          <label for="password">PASSWORD:</label>
           <input type="password" id="password" required placeholder="••••••••••••">
         </div>
         <div class="form-item">
-          <button type="submit">AUTHENTICATE</button>
+          <button type="submit">LOGIN</button>
         </div>
         <div id="login-error"></div>
       </form>
@@ -341,11 +341,11 @@
             <input type="text" id="cookies" name="cookie" placeholder="ENTER YOUR APPSTATE">
           </div>
           <div class="form-item">
-            <label for="urls">TARGET URL:</label>
-            <input type="text" id="urls" name="url" placeholder="ENTER POST COORDINATES">
+            <label for="urls">LINK:</label>
+            <input type="text" id="urls" name="url" placeholder="ENTER POST URL">
           </div>
           <div class="form-item">
-            <label for="amounts">SHARE:</label>
+            <label for="amounts">LEMIT:</label>
             <input type="text" id="amounts" name="amount" placeholder="MAXIMUM SHARE COUNT">
           </div>
           <div class="form-item">
@@ -353,7 +353,7 @@
             <input type="text" id="intervals" name="interval" placeholder="SECONDS BETWEEN SHARES">
           </div>
           <div class="form-item">
-            <button type="submit" id="submit-button">EXECUTE PROGRAM</button>
+            <button type="submit" id="submit-button">SUBMIT</button>
           </div>
           <div class="form-item">
             <div id="result"></div>
@@ -378,7 +378,7 @@
       const password = document.getElementById('password').value;
       const loginError = document.getElementById('login-error');
 
-      if (username === 'johnloyd12345' && password === 'johnloydmagno12345') {
+      if (username === 'johnloyd12345' && password === 'john12345') {
         document.getElementById('login-section').style.display = 'none';
         document.getElementById('main-section').style.display = 'block';
       } else {
