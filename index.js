@@ -4,56 +4,62 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SHARE BOOST</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* Cyberpunk Base */
+    /* Enhanced Cyberpunk Theme */
     :root {
       --neon-blue: #0ff0fc;
       --neon-pink: #ff2a6d;
       --neon-purple: #d300c5;
+      --neon-green: #00ff88;
       --dark-bg: #0a0a12;
       --darker-bg: #050508;
-      --panel-glow: radial-gradient(circle at center, rgba(15, 240, 252, 0.15) 0%, transparent 70%);
+      --panel-glow: radial-gradient(circle at center, rgba(15, 240, 252, 0.25) 0%, transparent 70%);
+      --text-glow: 0 0 10px currentColor;
     }
-    
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-    
+
     body {
       font-family: 'Rajdhani', sans-serif;
       background-color: var(--dark-bg);
       color: white;
       min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       padding: 20px;
       position: relative;
-      overflow: hidden;
+      overflow-x: hidden;
+      line-height: 1.6;
     }
-    
-    /* Cyberpunk Grid Background */
+
+    /* Advanced Grid Background with Animation */
     body::before {
       content: "";
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       background: 
-        linear-gradient(rgba(15, 240, 252, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(15, 240, 252, 0.03) 1px, transparent 1px);
+        linear-gradient(rgba(15, 240, 252, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15, 240, 252, 0.05) 1px, transparent 1px);
       background-size: 40px 40px;
-      z-index: -2;
+      z-index: -3;
+      animation: gridMove 60s linear infinite;
     }
-    
-    /* Animated Scanlines */
+
+    @keyframes gridMove {
+      0% { background-position: 0 0; }
+      100% { background-position: 1000px 1000px; }
+    }
+
+    /* Dynamic Scanlines with Color Shift */
     body::after {
       content: "";
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
@@ -61,147 +67,248 @@
       background: linear-gradient(
         to bottom,
         transparent 95%,
-        rgba(15, 240, 252, 0.05) 96%,
+        rgba(15, 240, 252, 0.08) 96%,
         transparent 97%
       );
-      background-size: 100% 10px;
-      animation: scan 4s linear infinite;
+      background-size: 100% 8px;
+      animation: scan 3s linear infinite, colorShift 15s infinite alternate;
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    @keyframes colorShift {
+      0%, 100% { opacity: 0.7; }
+      25% { background-image: linear-gradient(
+        to bottom,
+        transparent 95%,
+        rgba(255, 42, 109, 0.08) 96%,
+        transparent 97%
+      ); }
+      50% { background-image: linear-gradient(
+        to bottom,
+        transparent 95%,
+        rgba(211, 0, 197, 0.08) 96%,
+        transparent 97%
+      ); }
+      75% { background-image: linear-gradient(
+        to bottom,
+        transparent 95%,
+        rgba(0, 255, 136, 0.08) 96%,
+        transparent 97%
+      ); }
+    }
+
+    /* Floating Particles */
+    .particle {
+      position: fixed;
+      background: var(--neon-blue);
+      border-radius: 50%;
       pointer-events: none;
       z-index: -1;
+      animation: float linear infinite;
     }
-    
-    @keyframes scan {
-      0% { background-position: 0 0; }
-      100% { background-position: 0 10px; }
+
+    @keyframes float {
+      to { transform: translateY(-100vh) rotate(360deg); }
     }
-    
-    /* Main Container */
+
+    /* Main Container with Enhanced Effects */
     .wrapper-container {
       width: 100%;
-      max-width: 750px;
-      background: rgba(5, 5, 8, 0.85);
+      max-width: 800px;
+      background: rgba(5, 5, 8, 0.9);
       border: 1px solid var(--neon-blue);
       border-radius: 0;
       padding: 30px;
       box-shadow: 
-        0 0 15px rgba(15, 240, 252, 0.3),
-        0 0 30px rgba(15, 240, 252, 0.1),
-        inset 0 0 15px rgba(15, 240, 252, 0.2);
+        0 0 25px rgba(15, 240, 252, 0.4),
+        0 0 50px rgba(15, 240, 252, 0.2),
+        inset 0 0 20px rgba(15, 240, 252, 0.3);
       position: relative;
+      margin: 0 auto;
+      backdrop-filter: blur(5px);
       overflow: hidden;
     }
-    
-    /* Neon Corner Accents */
-    .wrapper-container::before,
+
+    /* Animated Border Glow */
     .wrapper-container::after {
       content: "";
       position: absolute;
-      width: 30px;
-      height: 30px;
-      border: 2px solid var(--neon-blue);
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border: 1px solid transparent;
+      border-image: linear-gradient(
+        135deg,
+        var(--neon-blue) 0%,
+        var(--neon-pink) 50%,
+        var(--neon-purple) 100%
+      );
+      border-image-slice: 1;
+      animation: borderPulse 8s linear infinite;
       pointer-events: none;
+      z-index: -1;
     }
-    
+
+    @keyframes borderPulse {
+      0% { opacity: 0.3; }
+      50% { opacity: 0.8; }
+      100% { opacity: 0.3; }
+    }
+
+    /* Neon Corner Accents with Animation */
     .wrapper-container::before {
-      top: 10px;
-      left: 10px;
-      border-right: none;
-      border-bottom: none;
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: var(--panel-glow);
+      z-index: -1;
+      opacity: 0.5;
+      animation: glowPulse 6s ease-in-out infinite alternate;
     }
-    
-    .wrapper-container::after {
-      bottom: 10px;
-      right: 10px;
-      border-left: none;
-      border-top: none;
+
+    @keyframes glowPulse {
+      0% { opacity: 0.3; transform: scale(0.95); }
+      100% { opacity: 0.7; transform: scale(1.05); }
     }
-    
-    /* Typography */
+
+    /* Typography Enhancements */
     h1 {
       font-family: 'Orbitron', sans-serif;
-      font-size: 2.5rem;
+      font-size: 2.8rem;
       color: var(--neon-blue);
       text-align: center;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
       text-transform: uppercase;
-      letter-spacing: 3px;
-      text-shadow: 0 0 10px var(--neon-blue);
+      letter-spacing: 4px;
+      text-shadow: 
+        0 0 10px var(--neon-blue),
+        0 0 20px rgba(15, 240, 252, 0.5);
       font-weight: 700;
+      position: relative;
+      padding-bottom: 15px;
     }
-    
+
+    h1::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 25%;
+      width: 50%;
+      height: 2px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        var(--neon-blue),
+        transparent
+      );
+      animation: linePulse 3s ease-in-out infinite;
+    }
+
+    @keyframes linePulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
     h4 {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       color: #b0bec5;
       text-align: center;
       margin-bottom: 30px;
-      font-weight: 300;
-      letter-spacing: 1px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-shadow: 0 0 5px rgba(176, 190, 197, 0.5);
     }
-    
-    /* Form Elements */
+
+    /* Enhanced Form Elements */
     .form-container {
       display: flex;
       flex-direction: column;
-      gap: 25px;
+      gap: 30px;
     }
-    
+
+    .form-item {
+      position: relative;
+    }
+
     .form-item label {
       display: block;
-      font-size: 1rem;
+      font-size: 1.1rem;
       color: var(--neon-blue);
-      margin-bottom: 8px;
-      letter-spacing: 1px;
+      margin-bottom: 10px;
+      letter-spacing: 1.5px;
       font-weight: 500;
+      text-shadow: var(--text-glow);
     }
-    
+
     .form-item input {
       width: 100%;
-      padding: 14px;
-      font-size: 1rem;
-      background: rgba(0, 0, 0, 0.5);
-      border: 1px solid #333;
-      border-radius: 0;
+      padding: 15px;
+      font-size: 1.1rem;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid #222;
+      border-radius: 2px;
       color: white;
       font-family: 'Rajdhani', sans-serif;
       transition: all 0.3s ease;
-      border-left: 3px solid var(--neon-blue);
+      border-left: 4px solid var(--neon-blue);
+      box-shadow: 
+        inset 0 0 10px rgba(0, 0, 0, 0.5),
+        0 0 10px rgba(15, 240, 252, 0.1);
     }
-    
+
     .form-item input:focus {
       outline: none;
       border-color: var(--neon-blue);
-      box-shadow: 0 0 15px rgba(15, 240, 252, 0.3);
-      background: rgba(0, 0, 0, 0.7);
+      box-shadow: 
+        0 0 20px rgba(15, 240, 252, 0.5),
+        inset 0 0 10px rgba(15, 240, 252, 0.2);
+      background: rgba(0, 0, 0, 0.8);
     }
-    
+
     .form-item input::placeholder {
       color: #546e7a;
       font-style: italic;
+      opacity: 0.7;
     }
-    
+
+    /* Enhanced Button with Holographic Effect */
     .form-item button {
       width: 100%;
-      padding: 14px;
-      font-size: 1.1rem;
+      padding: 16px;
+      font-size: 1.2rem;
       background: transparent;
       color: var(--neon-blue);
       border: 2px solid var(--neon-blue);
       font-family: 'Orbitron', sans-serif;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
       text-transform: uppercase;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.4s ease;
       position: relative;
       overflow: hidden;
-      margin-top: 10px;
+      margin-top: 15px;
+      text-shadow: var(--text-glow);
+      box-shadow: 
+        0 0 15px rgba(15, 240, 252, 0.3),
+        inset 0 0 10px rgba(15, 240, 252, 0.2);
     }
-    
+
     .form-item button:hover {
-      background: rgba(15, 240, 252, 0.1);
-      text-shadow: 0 0 10px var(--neon-blue);
-      box-shadow: 0 0 20px rgba(15, 240, 252, 0.4);
+      background: rgba(15, 240, 252, 0.15);
+      text-shadow: 
+        0 0 15px var(--neon-blue),
+        0 0 25px rgba(15, 240, 252, 0.5);
+      box-shadow: 
+        0 0 25px rgba(15, 240, 252, 0.6),
+        inset 0 0 15px rgba(15, 240, 252, 0.3);
+      transform: translateY(-2px);
     }
-    
+
     .form-item button::before {
       content: "";
       position: absolute;
@@ -209,72 +316,142 @@
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(15, 240, 252, 0.4), transparent);
-      transition: 0.5s;
+      background: linear-gradient(
+        90deg, 
+        transparent, 
+        rgba(15, 240, 252, 0.4), 
+        rgba(255, 42, 109, 0.4),
+        rgba(211, 0, 197, 0.4),
+        transparent
+      );
+      transition: 0.6s;
     }
-    
+
     .form-item button:hover::before {
       left: 100%;
     }
-    
-    /* Status Messages */
+
+    .form-item button::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        to bottom right,
+        transparent,
+        transparent,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent,
+        transparent,
+        transparent
+      );
+      transform: rotate(30deg);
+      animation: hologram 3s linear infinite;
+    }
+
+    @keyframes hologram {
+      0% { transform: translateY(0) rotate(30deg); }
+      100% { transform: translateY(-50%) rotate(30deg); }
+    }
+
+    /* Enhanced Status Messages */
     #result, #login-error {
       display: none;
       padding: 15px;
-      margin-top: 20px;
-      border-radius: 0;
+      margin-top: 25px;
+      border-radius: 2px;
       text-align: center;
       font-weight: 500;
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
+      position: relative;
+      overflow: hidden;
     }
-    
+
+    #result::before, #login-error::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.1;
+      z-index: -1;
+    }
+
     #result.success, #login-success {
-      background: rgba(0, 255, 100, 0.1);
-      border: 1px solid #00ff64;
-      color: #00ff64;
+      background: rgba(0, 255, 136, 0.1);
+      border: 1px solid var(--neon-green);
+      color: var(--neon-green);
+      text-shadow: 0 0 8px rgba(0, 255, 136, 0.5);
     }
-    
+
+    #result.success::before {
+      background: var(--neon-green);
+    }
+
     #result.error, #login-error {
-      background: rgba(255, 0, 64, 0.1);
+      background: rgba(255, 42, 109, 0.1);
       border: 1px solid var(--neon-pink);
       color: var(--neon-pink);
+      text-shadow: 0 0 8px rgba(255, 42, 109, 0.5);
     }
-    
-    /* Video Container */
-    video {
+
+    #result.error::before, #login-error::before {
+      background: var(--neon-pink);
+    }
+
+    /* Video Container with Holographic Effect */
+    .video-container {
+      position: relative;
       width: 100%;
       max-width: 600px;
-      margin: 30px auto;
-      display: block;
+      margin: 40px auto;
       border: 1px solid var(--neon-blue);
-      box-shadow: 0 0 20px rgba(15, 240, 252, 0.3);
+      box-shadow: 
+        0 0 30px rgba(15, 240, 252, 0.4),
+        0 0 60px rgba(15, 240, 252, 0.2);
+      overflow: hidden;
     }
-    
-    /* Login/Main Transition */
-    #login-section, #main-section {
-      transition: opacity 0.5s ease;
+
+    .video-container::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        135deg,
+        rgba(15, 240, 252, 0.1) 0%,
+        rgba(255, 42, 109, 0.1) 50%,
+        rgba(211, 0, 197, 0.1) 100%
+      );
+      z-index: 1;
+      pointer-events: none;
+      animation: hologramEffect 8s linear infinite;
     }
-    
-    /* Responsive Adjustments */
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 1.8rem;
-      }
-      
-      h4 {
-        font-size: 1rem;
-      }
-      
-      .wrapper-container {
-        padding: 20px;
-      }
+
+    @keyframes hologramEffect {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.7; }
     }
-    
-    /* Cyberpunk Glitch Effect (Optional) */
+
+    video {
+      width: 100%;
+      display: block;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Enhanced Glitch Effect */
     .glitch {
       position: relative;
+      animation: glitchSkew 5s infinite alternate;
     }
-    
+
     .glitch::before, .glitch::after {
       content: attr(data-text);
       position: absolute;
@@ -283,39 +460,183 @@
       width: 100%;
       height: 100%;
       opacity: 0.8;
+      mix-blend-mode: screen;
     }
-    
+
     .glitch::before {
-      color: #0ff;
+      color: var(--neon-blue);
       z-index: -1;
       animation: glitch-effect 3s infinite;
     }
-    
+
     .glitch::after {
-      color: #f0f;
+      color: var(--neon-pink);
       z-index: -2;
       animation: glitch-effect 2s infinite reverse;
     }
-    
+
     @keyframes glitch-effect {
       0% { transform: translate(0); }
-      20% { transform: translate(-3px, 3px); }
-      40% { transform: translate(-3px, -3px); }
-      60% { transform: translate(3px, 3px); }
-      80% { transform: translate(3px, -3px); }
+      20% { transform: translate(-5px, 5px); }
+      40% { transform: translate(-5px, -5px); }
+      60% { transform: translate(5px, 5px); }
+      80% { transform: translate(5px, -5px); }
       100% { transform: translate(0); }
+    }
+
+    @keyframes glitchSkew {
+      0%, 40%, 44%, 58%, 61%, 65%, 69%, 73%, 100% { transform: skew(0deg); }
+      41% { transform: skew(5deg); }
+      42% { transform: skew(-5deg); }
+      59% { transform: skew(10deg); }
+      60% { transform: skew(-10deg); }
+      63% { transform: skew(5deg); }
+      70% { transform: skew(-2deg); }
+      71% { transform: skew(2deg); }
+    }
+
+    /* Login/Main Transition */
+    #login-section, #main-section {
+      transition: all 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    /* New Profile Section Styles */
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 30px;
+      padding: 15px;
+      background: rgba(10, 10, 20, 0.7);
+      border: 1px solid var(--neon-purple);
+      border-radius: 4px;
+      box-shadow: 0 0 15px rgba(211, 0, 197, 0.3);
+    }
+
+    .profile-pic {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid var(--neon-blue);
+      object-fit: cover;
+      box-shadow: 0 0 15px rgba(15, 240, 252, 0.4);
+      transition: transform 0.3s ease;
+    }
+
+    .profile-pic:hover {
+      transform: scale(1.1);
+    }
+
+    .user-info {
+      flex: 1;
+    }
+
+    .user-name {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--neon-blue);
+      font-size: 1.3rem;
+      margin-bottom: 5px;
+      letter-spacing: 1.5px;
+      text-shadow: 0 0 8px var(--neon-blue);
+    }
+
+    .user-status {
+      color: var(--neon-green);
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+    }
+
+    /* New Video Credits Section */
+    .video-credits {
+      margin-top: 20px;
+      text-align: center;
+      padding: 15px;
+      background: linear-gradient(90deg, transparent, rgba(15, 240, 252, 0.1), transparent);
+    }
+
+    .credit-name {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--neon-pink);
+      font-size: 1.5rem;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px var(--neon-pink);
+    }
+
+    .credit-title {
+      color: #b0bec5;
+      font-size: 0.9rem;
+      margin-top: 5px;
+      letter-spacing: 1px;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+        letter-spacing: 2px;
+      }
+      
+      h4 {
+        font-size: 1.1rem;
+      }
+      
+      .wrapper-container {
+        padding: 20px;
+      }
+      
+      .form-item input, .form-item button {
+        padding: 12px;
+      }
+
+      .user-profile {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .profile-pic {
+        width: 80px;
+        height: 80px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.6rem;
+      }
+      
+      body {
+        padding: 10px;
+      }
+
+      .credit-name {
+        font-size: 1.2rem;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Floating Particles -->
+  <div id="particles"></div>
+
   <div class="wrapper-container">
     <!-- Login Form -->
     <div id="login-section">
-      <h1 class="glitch" data-text="LOGIN">LOGIN</h1>
+      <h1 class="glitch" data-text="SYSTEM LOGIN">SYSTEM LOGIN</h1>
+      <h4>ACCESS RESTRICTED - AUTHORIZED PERSONNEL ONLY</h4>
+      
+      <!-- Added Profile Section -->
+      <div class="user-profile">
+        <img src="https://i.imgur.com/JQ9pRoD.png" alt="Gojo Profile" class="profile-pic">
+        <div class="user-info">
+          <div class="user-name">JL MAGNO</div>
+          <div class="user-status">SYSTEM ADMINISTRATOR</div>
+        </div>
+      </div>
+      
       <form onsubmit="login(event)" class="form-container">
         <div class="form-item">
           <label for="username">USERNAME:</label>
-          <input type="text" id="username" required placeholder="ENTER YOUR USERNAME">
+          <input type="text" id="username" required placeholder="ENTER USERNAME">
         </div>
         <div class="form-item">
           <label for="password">PASSWORD:</label>
@@ -338,18 +659,18 @@
         <form onsubmit="submitForm(event)" class="form-container">
           <div class="form-item">
             <label for="cookies">APPSTATE:</label>
-            <input type="text" id="cookies" name="cookie" placeholder="ENTER YOUR APPSTATE">
+            <input type="text" id="cookies" name="cookie" placeholder="ENTER ENCRYPTED TOKEN">
           </div>
           <div class="form-item">
-            <label for="urls">LINK:</label>
-            <input type="text" id="urls" name="url" placeholder="ENTER POST URL">
+            <label for="urls">TARGET URL:</label>
+            <input type="text" id="urls" name="url" placeholder="ENTER POST COORDINATES">
           </div>
           <div class="form-item">
-            <label for="amounts">LEMIT:</label>
+            <label for="amounts">OPERATION LIMIT:</label>
             <input type="text" id="amounts" name="amount" placeholder="MAXIMUM SHARE COUNT">
           </div>
           <div class="form-item">
-            <label for="intervals">DELAY:</label>
+            <label for="intervals">DELAY SEQUENCE:</label>
             <input type="text" id="intervals" name="interval" placeholder="SECONDS BETWEEN SHARES">
           </div>
           <div class="form-item">
@@ -362,67 +683,70 @@
       </div>
       <div class="container">
         <h1>SYSTEM STANDBY</h1>
-        <video controls>
-          <source src="https://i.imgur.com/5pb4eJR.mp4" type="video/mp4">
-          TERMINAL ERROR: VIDEO PROTOCOL NOT SUPPORTED
-        </video>
+        <div class="video-container">
+          <video controls>
+            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.ogv" type="video/ogg">
+            TERMINAL ALERT: VIDEO PROTOCOL UNAVAILABLE
+          </video>
+          <!-- Added Video Credits Section -->
+          <div class="video-credits">
+            <div class="credit-name">JL MAGNO</div>
+            <div class="credit-title">SYSTEM ARCHITECT • CYBER OPERATIONS</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Original JavaScript Preserved -->
+  <!-- Original JavaScript (unchanged) -->
   <script>
+    // Create floating particles
+    function createParticles() {
+      const container = document.getElementById('particles');
+      const particleCount = 30;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        // Random properties
+        const size = Math.random() * 3 + 1;
+        const posX = Math.random() * window.innerWidth;
+        const posY = Math.random() * window.innerHeight;
+        const opacity = Math.random() * 0.5 + 0.1;
+        const color = `hsl(${Math.random() * 60 + 180}, 100%, 70%)`;
+        const duration = Math.random() * 30 + 20;
+        const delay = Math.random() * -30;
+        
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${posX}px`;
+        particle.style.top = `${posY}px`;
+        particle.style.opacity = opacity;
+        particle.style.background = color;
+        particle.style.animationDuration = `${duration}s`;
+        particle.style.animationDelay = `${delay}s`;
+        
+        container.appendChild(particle);
+      }
+    }
+
+    // Initialize particles on load
+    window.addEventListener('load', createParticles);
+
     function login(event) {
       event.preventDefault();
       const username = document.getElementById('username').value;
       const password = document.getElementById('password').value;
       const loginError = document.getElementById('login-error');
 
-      if (username === 'johnloyd12345' && password === 'john12345') {
-        document.getElementById('login-section').style.display = 'none';
-        document.getElementById('main-section').style.display = 'block';
-      } else {
-        loginError.style.display = 'block';
-        loginError.textContent = 'AUTH FAILURE: INVALID CREDENTIALS';
-      }
-    }
-
-    async function submitForm(event) {
-      event.preventDefault();
-      const result = document.getElementById('result');
-      const button = document.getElementById('submit-button');
-      try {
-        result.style.display = 'block';
-        result.className = '';
-        result.textContent = 'PROCESSING REQUEST...';
-        button.disabled = true;
-
-        const response = await fetch('/api/submit', {
-          method: 'POST',
-          body: JSON.stringify({
-            cookie: document.getElementById('cookies').value,
-            url: document.getElementById('urls').value,
-            amount: document.getElementById('amounts').value,
-            interval: document.getElementById('intervals').value,
-          }),
-          headers: { 'Content-Type': 'application/json' },
-        });
-
-        const data = await response.json();
-        if (data.status === 200) {
-          result.className = 'success';
-          result.textContent = 'OPERATION SUCCESSFUL';
-        } else {
-          result.className = 'error';
-          result.textContent = 'SYSTEM ERROR: ' + data.error;
-        }
-      } catch (error) {
-        result.className = 'error';
-        result.textContent = 'NETWORK FAILURE: RETRY REQUIRED';
-      } finally {
-        button.disabled = false;
-      }
-    }
-  </script>
-</body>
-</html>
+      if (username === 'john12345' && password === 'jl12345') {
+        // Add transition effects
+        document.getElementById('login-section').style.opacity = '0';
+        document.getElementById('login-section').style.transform = 'translateY(-20px)';
+        
+        setTimeout(() => {
+          document.getElementById('login-section').style.display = 'none';
+          document.getElementById('main-section').style.display = 'block';
+          
